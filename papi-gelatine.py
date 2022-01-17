@@ -84,18 +84,24 @@ def print_slow(str):
         sys.stdout.write(letter)
         sys.stdout.flush()
 
-topping_price = 0
+A,B,C,D = False,False,False,False
+business = False
+private = False
+taste_liter = 0
+
+horn_price = 1.25
+cup_price = 0.75
+icecream_ball_price = 0.95
 cone = 0
 cup = 0
-bolletjes_price = 0.95
-horn_price = 1.25
-reciept = f'---[Papi Gelato]---\n'
+x = 1
 total = 0
+reciept = f'-------[Papi Gelatine]-------\n'
 
 def icecream():
     choice = ""
     cone_cup = ""
-    global cone,amount_icecream_balls,cup,topping_price,toppings
+    global cone,amount_icecream_balls,cup,topping_price,toppings,reciept,x
 
     clearScreen(0)
     print_slow("Welcome to Papi Gelatine\n")
@@ -121,6 +127,50 @@ def icecream():
             print_slow("Sorry, we don't have any bigger cups.\n")
             clearScreen(1)
             icecream()
+        if amount_icecream_balls <= 3:
+            cone_cup = input(f"Would you like a Cone or a Cup for your ice cream balls?\n")
+        elif amount_icecream_balls <= 8:
+            print_slow(f"Here is your cup with {amount_icecream_balls} ice cream balls\n")
+            cup = 1
+        elif amount_icecream_balls > 8:
+            print_slow ("Sorry we don't have any bigger cups.\n")
+            clearScreen(1)
+            icecream(1)
+        else:
+            print_slow("Sorry, the option you chose is not available.")
+            clearScreen(2)
+            icecream()
+        clearScreen(1)
+        icrecream_bolletjes_kosten = round (amount_icecream_balls * icecream_ball_price,2) # afgerond op 2 decimaal
+        if cone_cup == "cone":
+            cone = 1
+        elif cone_cup == "cup":
+            cup = 1
+        cup_cost = cup_price * cup
+        horn_cost = horn_price * cone
+        toppings = input("What toppings would you like on your ice cream ?\n A. Nothing \n B. Cream \n C. Sprinkles\n D. Caramel\n").lower()
+
+        if toppings == "a":
+            A = True
+            topping_price = 0
+        elif toppings == "b":
+            B = True
+            topping_price = 0.50
+        elif toppings == "c":
+            C = True
+            topping_price = 0.30
+        elif toppings == "d":
+            D = True
+            if cone == 1:
+                topping_price = 0.60
+            else:
+                topping_price = 0.90
+        else:
+            print_slow("Sorry, I didn't quite get that ?\n")
+            clearScreen(2)
+            icecream()
+        choice = input(f"here is your order with {amount_icecream_balls} ice cream balls. Would you like to order again ?\n")
+
 
 
 #-----------------------Function Execute--------------------#
