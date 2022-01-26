@@ -220,6 +220,121 @@
 # #-----------------------Function Execute--------------------#
 # icecream()
 
+# import time,os,sys
+
+# def clear_screen(sleepTime):
+#     time.sleep(sleepTime)
+#     os.system("cls")
+
+# def print_slow(str):
+#     for letter in str:
+#         sys.stdout.write(letter)
+#         sys.stdout.flush()
+#         time.sleep(0.05)
+
+# taste = ''
+
+# price_balls = 0.95
+# price_cup = 0.75
+# price_horn = 1.25
+
+# amount_cup = 0
+# amount_horn = 0
+# total_balls = 0
+
+# whipped_cream = 0.50
+# sprinkles = 0.30
+# caramel_H = 0.60
+# caramel_B = 0.90
+
+# toppings_1 = 0 #toppings_1
+# toppings_total = 0 
+
+# #==================== Intro / Regular Responses ====================#
+# def intro():
+#     print_slow ('Welcome to Papi Gelatine')
+#     clear_screen(1)
+# def thanks():
+#     print_slow ('Thank you & see you again ! ')
+#     clear_screen(1)
+# def no_option():
+#     print_slow ('Unfortunately that is not a option we provide')
+#     clear_screen(1)
+# def no_big_cups():
+#     print_slow ('Unfortunately we do not have any bigger cups')
+#     clear_screen(1)
+
+# #==================== Private or Business ? ====================#
+
+# def private_or_business():
+#     repeat_2 = True #check if irrelivant 
+#     while repeat_2:
+
+#         repeat_2 = False
+#         choice = input("Hello, would you like to order for \n 1. (A) Private \n 2. (B) Business \n").upper() #check if variable correct or non interrupting 
+
+#         if choice == "A" or choice == "B":
+#             return choice
+        
+#         else:
+#             no_option()
+#             clear_screen(2)
+#             repeat_2 = True
+
+# #==================== Business_Receipt ======================#
+
+# def business_receipt():
+#     price_liter_ice = 9.80
+#     total = (liter_ice * price_liter_ice) #inquire into liter_ice
+#     btw = (total / 106 * 6)
+#     print("------------[Papi Gelato------------]")
+#     print("liter         {} x {:.2f}      = €{:.2f}".format((liter_ice),price_liter_ice,total))#inquire into
+#     print("totaal                      = €{:.2f}".format(total))
+#     print("btw (6%)                    = €{:.2f}".format(btw))
+
+# #==================== Business_Flavours  ====================#
+
+# def business_flavours():
+#     global liter_ice
+#     liter_amount = 0
+#     liter_ice = int (input('How much liters of ice would you like to order ?'))
+
+#     for x in range (liter_ice):
+#         liter_amount += 1
+#         choice_flavours = input('What flavours would you like for your {} liter ice ? \n S) Strawberry \n C) Chocolate \n V) Vanille').format(liter_amount).upper() #Zsmaken 
+
+#         if choice_flavours == "S":
+#             choice_flavours = "Strawberry"
+
+#         elif choice_flavours == "C":
+#             choice_flavours = "Chocolate"
+
+#         elif choice_flavours == "V":
+#             choice_flavours = "Vanille"
+        
+#         else:
+#             no_option()
+#             business_flavours()
+
+# #==================== Toppings ====================#
+
+# def toppings(cup_horn):
+#     repeat = True
+#     while repeat:
+#         repeat = False
+#         global toppings , toppings_total
+#         toppings = input ("What kind of topping would you like ? \n A) Nothing \n B) Whipped Cream \n C) Sprinkles \n D) Caramel Sauce").upper()
+
+#         if toppings == "A":
+#             pass
+
+#         elif toppings == "B":
+#             toppings_1
+
+# #==================== Functions Executed ====================#
+# intro()
+# private_or_business()
+
 import time,os,sys
 
 def clear_screen(sleepTime):
@@ -321,16 +436,115 @@ def business_flavours():
 def toppings(cup_horn):
     repeat = True
     while repeat:
-        repeat = False
-        global toppings , toppings_total
+        repeat = False # 
+        global toppings_1 , toppings_total
         toppings = input ("What kind of topping would you like ? \n A) Nothing \n B) Whipped Cream \n C) Sprinkles \n D) Caramel Sauce").upper()
 
         if toppings == "A":
             pass
 
         elif toppings == "B":
-            toppings_1
+            toppings_1 += 1
+            toppings_total += whipped_cream
+
+        elif toppings == "C":
+            toppings_1 += round_ball  # bolletje 
+            toppings_total += round_ball
+
+        elif toppings == "D":
+            toppings_1 += 1
+            if cup_horn == "horn": #hoorntje
+                toppings_total += caramel_H
+            else:
+                toppings_total += caramel_B
+        
+        else:
+            no_option()
+            repeat = True
+
+#==================== Receipt ====================#
+
+def receipt():
+    global total_balls , round_ball #bolletje 
+    round_ball = total_balls
+    total_1 = total_balls
+    total_2 = amount_cup * price_cup # check if errors
+    total_3 = amount_horn * price_horn
+    total = (total_1 + total_2 + total_3 + toppings_total)
+
+    print("------------[Papi Gelato]-------------")
+    print("Icecream balls   {} x = €{:.2f} = €{:.2f}  ".format(round_ball,price_balls,total_1))
+
+    if amount_horn > 0:
+        print("Hoornje     {} x = €{}".format(amount_horn,total_3))
+
+    else:
+        None
+
+    if amount_cup > 0:
+        print("Bakje       {} x = €{}".format(amount_cup,total_2))
+
+    else:
+        None
+
+    if toppings_1 > 0:
+        print("Topping     {} x = €{:.2f}".format(toppings_1,toppings_total))
+
+    else:
+        None
+
+    print("--------------------------------------")
+    print("Totaal €{:.2f} betalen".format(total))
+
+#==================== Order Icream Again ====================#
+def order():
+    order_again = input('Would you like to order some more ? Y / N ').upper
+
+    if order_again == "Y":
+        return True
+
+    elif order_again == "N":
+        return False
+
+    else:
+        no_option()
+        order()
+
+#==================== Horn & Cup ====================#
+def horn_cup(amount_balls):
+    repeat = True
+    while repeat:
+        repeat = False
+        cup_or_horn = input ("Would you like those {} ice balls in a \n A) Horn \n B) Cup".format (amount_balls)).upper()
+
+        if cup_or_horn == "A":
+            return "Horn"
+
+        elif cup_or_horn == "B":
+            return "Cup"
+
+        else:
+            no_option()
+            horn_cup()
+            return
+
+#==================== Icecream_balls     ====================#
+
+def icecream_balls(): #step1
+    order_icecream_balls = int (input("How many ice cream balls would you like ?"))
+
+    if order_icecream_balls >= 1 and order_icecream_balls <= 8:
+        return order_icecream_balls
+
+    else:
+        no_big_cups()
+        icecream_balls() #bolletjes_stap1
+        
+
+#==================== flavours ====================#
+
+
 
 #==================== Functions Executed ====================#
 intro()
-private_or_business()
+
