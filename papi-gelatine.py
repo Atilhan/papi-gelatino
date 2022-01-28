@@ -371,7 +371,7 @@ def intro():
     clear_screen(1)
 def thanks():
     print_slow ('Thank you & see you again ! ')
-    clear_screen(1)
+    clear_screen(3)
 def no_option():
     print_slow ('Unfortunately that is not a option we provide')
     clear_screen(1)
@@ -416,7 +416,7 @@ def business_flavours():
 
     for x in range (liter_ice):
         liter_amount += 1
-        choice_flavours = input('What flavours would you like for your {} liter ice ? \n S) Strawberry \n C) Chocolate \n V) Vanille').format(liter_amount).upper() #Zsmaken 
+        choice_flavours = input('What flavours would you like for your {} liter ice ? \n S) Strawberry \n C) Chocolate \n V) Vanille'.format(liter_ice)).upper() #Zsmaken 
 
         if choice_flavours == "S":
             choice_flavours = "Strawberry"
@@ -543,8 +543,62 @@ def icecream_balls(): #step1
 
 #==================== flavours ====================#
 
+def flavours(amount_icecream_balls): #aantal_bolletjes
+    number = 0
+    for i in range (amount_icecream_balls):
+        number += 1
+        flavours = input ('What flavour would you like for your {} icecream balls? \n A) Strawberry \n C) Chocolate \n V) Vanille.'.format(number)).upper()
+        
+        if flavours == "S":
+            flavours = "Strawberry"
+        
+        elif flavours == "C":
+            flavours = "Chocolate"
 
+        elif flavours == "V":
+            flavours = "Vanille"
+
+        else:
+            no_option()
+            flavours()
 
 #==================== Functions Executed ====================#
+
 intro()
+
+active = True
+while active:
+    choice = private_or_business()
+
+    if choice == "A":
+        business_flavours()
+        business_receipt()
+        active = False
+    
+    else:
+        choice == "B"
+        round_ball = icecream_balls()
+        total_balls += round_ball
+
+        if round_ball >= 1 and round_ball <= 3:
+            choice_cup_horn = horn_cup(round_ball)
+
+        elif round_ball >= 3 and round_ball <= 8:
+            choice_cup_horn = "Cup"
+        print_slow ('You will get a {} with {} icecream balls'.format(choice_cup_horn,round_ball))
+        
+        if choice_cup_horn == "Horn":
+            amount_horn += 1
+        
+        else: 
+            amount_cup += 1
+
+        flavours(round_ball)
+        toppings(choice_cup_horn)
+        active = order()
+        receipt()
+thanks()
+        
+
+
 
