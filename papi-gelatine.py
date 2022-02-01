@@ -400,7 +400,7 @@ def private_or_business():
 
 def business_receipt():
     price_liter_ice = 9.80
-    total = (liter_ice * price_liter_ice) #inquire into liter_ice
+    total = (liter_ice * price_liter_ice) 
     btw = (total / 106 * 6)
     print("------------[Papi Gelato------------]")
     print("liter         {} x {:.2f}      = €{:.2f}".format((liter_ice),price_liter_ice,total))#inquire into
@@ -416,7 +416,7 @@ def business_flavours():
 
     for x in range (liter_ice):
         liter_amount += 1
-        choice_flavours = input('What flavours would you like for your {} liter ice ? \n S) Strawberry \n C) Chocolate \n V) Vanille'.format(liter_ice)).upper() #Zsmaken 
+        choice_flavours = input('What flavours would you like for your {} liter ice ? \n S) Strawberry \n C) Chocolate \n V) Vanille'.format(liter_ice)).upper()
 
         if choice_flavours == "S":
             choice_flavours = "Strawberry"
@@ -498,7 +498,7 @@ def receipt():
 
 #==================== Order Icream Again ====================#
 def order():
-    order_again = input('Would you like to order some more ? Y / N ').upper
+    order_again = input('Would you like to order some more ? Y / N ').upper()
 
     if order_again == "Y":
         return True
@@ -547,7 +547,7 @@ def flavours(amount_icecream_balls): #aantal_bolletjes
     number = 0
     for i in range (amount_icecream_balls):
         number += 1
-        flavours = input ('What flavour would you like for your {} icecream balls? \n A) Strawberry \n C) Chocolate \n V) Vanille.'.format(number)).upper()
+        flavours = input ('What flavour would you like for your {} icecream balls? \n S) Strawberry \n C) Chocolate \n V) Vanille.'.format(number)).upper()
         
         if flavours == "S":
             flavours = "Strawberry"
@@ -570,13 +570,13 @@ active = True
 while active:
     choice = private_or_business()
 
-    if choice == "A":
+    if choice == "B":
         business_flavours()
         business_receipt()
         active = False
     
     else:
-        choice == "B"
+        choice == "A"
         round_ball = icecream_balls()
         total_balls += round_ball
 
